@@ -166,7 +166,7 @@ iframe {
 }
 
 .container-table100 {
-  max-width: 1366px;
+  max-width: 70%;
   margin: 0 auto;
   min-height: 100vh;
   display: -webkit-box;
@@ -255,7 +255,7 @@ td {
   background-color: #fff;
   position: absolute;
   z-index: 1000;
-  width: 310px;
+  width: 180px;
   top: 0;
   left: 0;
 }
@@ -267,7 +267,7 @@ td {
 .wrap-table100-nextcols {
   width: 100%;
   overflow: auto;
-  padding-left: 310px;
+  padding-left: 180px;
   padding-bottom: 28px;
 }
 

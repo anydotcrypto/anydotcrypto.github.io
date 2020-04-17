@@ -50,14 +50,22 @@
     <div class="limiter">
       <div class="container-table100">
         <div class="wrap-table100">
-          <div style="text-align: center">
-            <h1 style="font-family: 'Lobster', serif; text-align:center">
+          <div style="text-align: center;">
+            <h1 style="font-family: 'Lobster', serif; text-align: center;">
               Cyberdice 2.0
             </h1>
+
             <br />
-            <p>
-              Publish a message below by entering our any.sender competition!
+            <p style="font-style: italic; font-weight: normal;">
+              Competition finishes at <span id="deadline"></span>.
             </p>
+            <p style="font-style: italic; font-weight: normal;">
+              Want to publish a message and be in the chance to win 5 eth?
+            </p>
+            <p style="font-style: italic; font-weight: normal;">
+              <b>Click here</b> to find out more.
+            </p>
+
             <br />
           </div>
           <div class="table100 ver1">
@@ -87,7 +95,7 @@
           </div>
           <div>
             <br />
-            <h1 style="font-family: 'Lobster', serif; text-align: center">
+            <h1 style="font-family: 'Lobster', serif; text-align: center;">
               Sponsors
             </h1>
           </div>
@@ -107,21 +115,21 @@
     <!--===============================================================================================-->
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script>
-      $(".js-pscroll").each(function() {
+      $(".js-pscroll").each(function () {
         var ps = new PerfectScrollbar(this);
 
-        $(window).on("resize", function() {
+        $(window).on("resize", function () {
           ps.update();
         });
 
-        $(this).on("ps-x-reach-start", function() {
+        $(this).on("ps-x-reach-start", function () {
           $(this)
             .parent()
             .find(".table100-firstcol")
             .removeClass("shadow-table100-firstcol");
         });
 
-        $(this).on("ps-scroll-x", function() {
+        $(this).on("ps-scroll-x", function () {
           $(this)
             .parent()
             .find(".table100-firstcol")
