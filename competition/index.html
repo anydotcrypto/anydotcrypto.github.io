@@ -48,23 +48,67 @@
 
   <body>
     <div class="limiter">
+      <div id="content">
+        <img src="images/anysender.png" class="logo" />
+      </div>
       <div class="container-table100">
         <div class="wrap-table100">
           <div style="text-align: center;">
-            <h1 style="font-family: 'Lobster', serif; text-align: center;">
-              Cyberdice 2.0
+            <h1
+              style="
+                font-family: 'Lobster', serif;
+                text-align: center;
+                font-size: 72pt;
+              "
+            >
+              CyberDice 2.0
             </h1>
-
-            <br />
-            <p style="font-style: italic; font-weight: normal;">
-              Competition finishes at <span id="deadline"></span>.
-            </p>
-            <p style="font-style: italic; font-weight: normal;">
-              Want to publish a message and be in the chance to win 5 eth?
-            </p>
-            <p style="font-style: italic; font-weight: normal;">
-              <b>Click here</b> to find out more.
-            </p>
+            <div class="shadow_container">
+              <p
+                style="
+                  font-weight: normal;
+                  color: rgb(255, 255, 255);
+                  font-size: 15pt;
+                "
+              >
+                We're launching any.sender, the first skin-in-the-game and non
+                custodial transaction sending service. To celebrate we're
+                hosting CyberDice 2.0, a provably fair competition with a prize
+                pool of 5 ETH!
+              </p>
+              <br />
+              <p
+                style="
+                  font-weight: normal;
+                  color: rgb(255, 255, 255);
+                  font-size: 15pt;
+                "
+              >
+                Anyone can enter,
+                <a
+                  style="text-decoration: underline; color: rgb(255, 255, 255);"
+                  href="https://etherscan.io/address/0x70107abb312db18bd9addec39ce711374b09ebc1"
+                  >find out more here.</a
+                >
+              </p>
+              <br />
+              <p
+                style="
+                  font-style: italic;
+                  font-weight: normal;
+                  color: rgb(255, 255, 255);
+                "
+              >
+                <a
+                  style="text-decoration: underline; color: rgb(255, 255, 255);"
+                  href="https://etherscan.io/address/0x70107abb312db18bd9addec39ce711374b09ebc1"
+                  >CyberDice</a
+                >
+                has minted <span id="totalTickets"></span> tickets with a prize
+                pool of 5 ETH and the competition finishes at
+                <span id="deadline"></span>
+              </p>
+            </div>
 
             <br />
           </div>
