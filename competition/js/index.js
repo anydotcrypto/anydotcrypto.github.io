@@ -27,8 +27,8 @@ $(document).ready(function () {
         );
 
         let message = decoded[2];
-        if(message.endsWith(".gif")) {
-            message = `<img src=\"${message}\" alt=\"User gif\" width=350 height=350/>`
+        if(message.endsWith(".gif")) {   
+            message = `<img src=\"${message}\" alt=\"\" onerror="this.onerror=null; this.alt='Gif not found - message must be a single url ending in .gif'" width=350 height=350/>`
         }
 
         $("#messages").append(
