@@ -28,7 +28,7 @@ $(document).ready(function () {
 
         let message = decoded[2];
         if(message.endsWith(".gif")) {
-            message = "<img src=\"http://i.stack.imgur.com/SBv4T.gif\" alt=\"User gif\"  width=250/>"
+            message = `<img src=\"${message}\" alt=\"User gif\" width=350 height=350/>`
         }
 
         $("#messages").append(
