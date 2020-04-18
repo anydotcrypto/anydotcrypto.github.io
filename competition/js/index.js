@@ -26,7 +26,7 @@ $(document).ready(function () {
           events[i]["raw"]["data"]
         );
 
-        let message = decoded[0];
+        let message = decoded[2];
 
         // Go through filter to make sure no bad words pop up
         for (let i = 0; i < badWords.length; i++) {
