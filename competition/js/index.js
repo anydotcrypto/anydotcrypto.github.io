@@ -20,7 +20,7 @@ $(document).ready(function () {
       toBlock: "latest",
     },
     function (error, events) {
-      for (let i = 0; i < events.length; i++) {
+      for (let i = events.length - 1; i >= 0; i--) {
         const decoded = web3.eth.abi.decodeParameters(
           ["address", "uint", "string"],
           events[i]["raw"]["data"]
