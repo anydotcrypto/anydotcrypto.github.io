@@ -26,15 +26,23 @@ $(document).ready(function () {
           events[i]["raw"]["data"]
         );
 
-        let message = decoded[2];
-        if(message.endsWith(".gif")) {   
-            message = `<img src="${message}" alt="" onerror="this.onerror=null; this.alt='Gif not found - message must be a single url ending in .gif'" width=350 height=350/>`
+        let message = decoded[0];
+
+        // Go through filter to make sure no bad words pop up
+        for (let i = 0; i < badWords.length; i++) {
+          message = message.replace(badWords[i], "***");
+        }
+
+        if (message.endsWith(".gif")) {
+          message = `<img src="${message}" alt="" onerror="this.onerror=null; this.alt='Gif not found - message must be a single url ending in .gif'" width=350 height=350/>`;
         }
 
         $("#messages").append(
           `<tr><td class="cell100 column1">` +
             events[i]["blockNumber"] +
-            `</td><td class="cell100 column2">` + message + `</td></tr>`
+            `</td><td class="cell100 column2">` +
+            message +
+            `</td></tr>`
         );
       }
 
@@ -42,7 +50,9 @@ $(document).ready(function () {
       if (events.length < toFill) {
         const diff = toFill - events.length;
         for (let i = 0; i < diff; i++) {
-          $("#messages").append(`<tr><td class="cell100 column1"></td><td class="cell100 column2"></td></tr>`);
+          $("#messages").append(
+            `<tr><td class="cell100 column1"></td><td class="cell100 column2"></td></tr>`
+          );
         }
       }
     }
