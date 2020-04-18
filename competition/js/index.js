@@ -7,6 +7,17 @@ var web3 = Web3
     )
   : null;
 
+// Check it is mainnet, otherwise use built-in infura.
+if (web3.eth.net.getNetworkType() !== "mainnet") {
+  var web3 = Web3
+    ? new Web3(
+        new Web3.providers.WebsocketProvider(
+          "wss://mainnet.infura.io/ws/v3/7333c8bcd07b4a179b0b0a958778762b"
+        )
+      )
+    : null;
+}
+
 var account;
 web3.eth.getAccounts().then((f) => {
   account = f[0];
