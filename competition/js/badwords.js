@@ -450,4 +450,5 @@ const badWords = [
   "willy",
   "xrated",
   "xxx",
+  `THIS IS SOME HATE-SPEECH" - censor me if you can Paddy`,
 ];

@@ -1,4 +1,11 @@
-var web3 = Web3 ? new Web3(Web3.givenProvider || "ws://localhost:8546") : null;
+var web3 = Web3
+  ? new Web3(
+      Web3.givenProvider ||
+        new Web3.providers.WebsocketProvider(
+          "wss://mainnet.infura.io/ws/v3/7333c8bcd07b4a179b0b0a958778762b"
+        )
+    )
+  : null;
 
 var account;
 web3.eth.getAccounts().then((f) => {
