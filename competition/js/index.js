@@ -25,13 +25,16 @@ $(document).ready(function () {
           ["address", "uint", "string"],
           events[i]["raw"]["data"]
         );
-        $("#blockTable").append(
+
+        let message = decoded[2];
+        if(message.endsWith(".gif")) {
+            message = "<img src=\"http://i.stack.imgur.com/SBv4T.gif\" alt=\"User gif\"  width=250/>"
+        }
+
+        $("#messages").append(
           `<tr><td class="cell100 column1">` +
             events[i]["blockNumber"] +
-            `</td></tr>`
-        );
-        $("#messages").append(
-          `<tr><td class="cell100 column2">` + decoded[2] + `</td></tr>`
+            `</td><td class="cell100 column2">` + message + `</td></tr>`
         );
       }
 
@@ -39,8 +42,7 @@ $(document).ready(function () {
       if (events.length < toFill) {
         const diff = toFill - events.length;
         for (let i = 0; i < diff; i++) {
-          $("#blockTable").append(`<tr><td class="cell100 column1"></td></tr>`);
-          $("#messages").append(`<tr><td class="cell100 column2"></td></tr>`);
+          $("#messages").append(`<tr><td class="cell100 column1"></td><td class="cell100 column2"></td></tr>`);
         }
       }
     }

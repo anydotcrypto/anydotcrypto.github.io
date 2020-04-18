@@ -201,12 +201,12 @@ td {
 }
 
 .column1 {
-  width: 100%;
+  width: 225px;
   padding-left: 40px;
 }
 
 .column2 {
-  width: 225px;
+  width: 100%;
   padding-left: 55px;
 }
 
