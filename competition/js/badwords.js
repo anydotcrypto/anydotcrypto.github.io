@@ -3,7 +3,6 @@ const badWords = [
   "4r5e",
   "5h1t",
   "5hit",
-  "a55",
   "anal",
   "anus",
   "ar5e",

@@ -68,9 +68,11 @@ $(document).ready(function () {
 
 
         $("#messages").append(
-          `<tr><td class="cell100 column1">` +
+          `<tr><td class="cell100 column1"><a href="https://etherscan.io/tx/` +
+            events[i]["transactionHash"] +
+            `">` +
             events[i]["blockNumber"] +
-            `</td><td class="cell100 column2" style='white-space: pre'>` +
+            `</a></td><td class="cell100 column2" style='white-space: pre'>` +
             message +
             `</td></tr>`
         );
