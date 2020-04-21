@@ -179,9 +179,18 @@ iframe {
   justify-content: center;
   padding: 100px 100px;
 }
-
 .wrap-table100 {
   width: 70%;
+}
+
+@media (max-width: 800px) {
+  .container-table100 {
+    padding: 100px 0px;
+  }
+
+  .wrap-table100 {
+    width: 95%;
+  }
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -203,6 +212,13 @@ td {
 .column1 {
   width: 225px;
   padding-left: 40px;
+}
+
+@media (max-width: 800px) {
+  .column1 {
+    width: 80px;
+    padding-left: 20px;
+  }
 }
 
 .column2 {
