@@ -23,21 +23,21 @@ web3.eth.getAccounts().then((f) => {
   account = f[0];
 });
 
-function sanitize(string) {
-  const map = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#x27;",
-    "/": "&#x2F;",
-  };
-  const reg = /[&<>"'/]/gi;
-  return string.replace(reg, (match) => map[match]);
-}
+var entityMap = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+  "/": "&#x2F;",
+  "`": "&#x60;",
+  "=": "&#x3D;",
+};
 
-function urlEncode(val) {
-
+function escapeHtml(string) {
+  return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+    return entityMap[s];
+  });
 }
 
 cyberDiceAbi = JSON.parse(
@@ -70,10 +70,12 @@ $(document).ready(function () {
           message = message.replace(badWords[i], "***");
         }
 
-        message = sanitize(message);
+        message = escapeHtml(message);
 
         message = message.replace(/[\S]+.gif/gi, (x) => {
-          return `\n<img src="${encodeURI(x)}" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/>\n`;
+          return `\n<img src="${encodeURI(
+            x
+          )}" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/>\n`;
         });
 
         $("#messages").append(
