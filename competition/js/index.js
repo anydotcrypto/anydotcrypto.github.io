@@ -51,14 +51,14 @@ $(document).ready(function () {
           message = message.replace(badWords[i], "***");
         }
 
-        if (message.endsWith(".gif")) {
-          message = `<img src="${message}" alt="" onerror="this.onerror=null; this.alt='Gif not found - message must be a single url ending in .gif'" width=350 height=350/>`;
-        }
+        message = message.replace(/[\S]+.gif/gi, (x) => {
+          return `\n<img src="${x}" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/>\n`;
+        });
 
         $("#messages").append(
           `<tr><td class="cell100 column1">` +
             events[i]["blockNumber"] +
-            `</td><td class="cell100 column2">` +
+            `</td><td class="cell100 column2" style='white-space: pre'>` +
             message +
             `</td></tr>`
         );
