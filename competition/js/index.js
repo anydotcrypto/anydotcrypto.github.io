@@ -29,7 +29,8 @@ cyberDiceAbi = JSON.parse(
 cyberDice = new web3.eth.Contract(cyberDiceAbi);
 cyberDice.options.address = "0x3521f13Ff6C0315d7C749081E848FF4A89667aE7";
 
-const totalMessages = 20;
+const totalMessages = 100;
+
 $(document).ready(function () {
   cyberDice.getPastEvents(
     "Entry",
@@ -38,7 +39,8 @@ $(document).ready(function () {
       toBlock: "latest",
     },
     function (error, events) {
-      for (let i = events.length - 1; i >= 0; i--) {
+      const numberOfMessages = Math.min(totalMessages - 1, events.length - 1);
+      for (let i = numberOfMessages; i >= 0; i--) {
         const decoded = web3.eth.abi.decodeParameters(
           ["address", "uint", "string"],
           events[i]["raw"]["data"]
@@ -61,6 +63,15 @@ $(document).ready(function () {
             `</td><td class="cell100 column2" style='white-space: pre'>` +
             message +
             `</td></tr>`
+        );
+      }
+
+      if (totalMessages > events.length) {
+        // append a starter gif
+        $("#messages").append(
+          `<tr><td class="cell100 column1">` +
+            9915666 +
+            `</td><td class="cell100 column2" style='white-space: pre'><img src="https://media.giphy.com/media/13GIgrGdslD9oQ/source.gif" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/></td></tr>`
         );
       }
 
