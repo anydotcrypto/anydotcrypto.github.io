@@ -98,7 +98,7 @@ $(document).ready(function () {
   web3.eth
     .getBalance("0x3521f13Ff6C0315d7C749081E848FF4A89667aE7")
     .then((f) => {
-      $(".prize").append(f.toString());
+      $(".prize").append(web3.utils.fromWei(f).toString());
     });
 
   cyberDice.methods
