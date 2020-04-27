@@ -141,9 +141,8 @@ $(document).ready(function () {
     .winner()
     .call()
     .then((f) => {
-      console.log(f);
       if (f.toString() !== "0x0000000000000000000000000000000000000000") {
-        $("#WINNER").append("<br>Winner: " + f.toString());
+        $("#WINNER").append(`<br>Winner: <a style="color: white; text-decoration: underline;" href="https://etherscan.io/address/${f.toString()}">${f.toString()}</a>`);
       }
     });
 
@@ -151,9 +150,8 @@ $(document).ready(function () {
     .beacon()
     .call()
     .then((f) => {
-      console.log(f);
       if (f.toString() !== "0") {
-        $("#beacon").append("<br>Beacon: " + f.toString());
+        $("#beacon").append("<br>Beacon: 0x" + (new web3.utils.BN(f)).toString(16));
       }
     });
 });
