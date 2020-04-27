@@ -151,7 +151,7 @@ $(document).ready(function () {
     .call()
     .then((f) => {
       if (f.toString() !== "0") {
-        $("#beacon").append("<br>Beacon: 0x" + (new web3.utils.BN(f)).toString(16));
+        $("#beacon").append("<br>Beacon: " + f.toString());
       }
     });
 });
