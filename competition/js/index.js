@@ -78,6 +78,12 @@ $(document).ready(function () {
           )}" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/>\n`;
         });
 
+        message = message.replace(/[\S]+.jpg/gi, (x) => {
+          return `\n<img src="${encodeURI(
+            x
+          )}" alt="" onerror="this.onerror=null; this.alt='Gif not found'" width=350 height=350/>\n`;
+        });
+
         $("#messages").append(
           `<tr><td class="cell100 column1"><a href="https://etherscan.io/tx/` +
             events[i]["transactionHash"] +
@@ -129,5 +135,25 @@ $(document).ready(function () {
     .call()
     .then((f) => {
       $("#totalTickets").append(f.toString());
+    });
+
+  cyberDice.methods
+    .winner()
+    .call()
+    .then((f) => {
+      console.log(f);
+      if (f.toString() !== "0x0000000000000000000000000000000000000000") {
+        $("#WINNER").append("<br>Winner: " + f.toString());
+      }
+    });
+
+  cyberDice.methods
+    .beacon()
+    .call()
+    .then((f) => {
+      console.log(f);
+      if (f.toString() !== "0") {
+        $("#beacon").append("<br>Beacon: " + f.toString());
+      }
     });
 });
