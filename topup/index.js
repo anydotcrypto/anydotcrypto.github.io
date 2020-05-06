@@ -1,4 +1,22 @@
+
 let web3 = undefined;
+let relay = undefined;
+
+const ABI = [
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      }
+    ],
+    "name": "depositFor",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+];
 
 function refreshUI() {
   const address = $("#inpAddress").val();
@@ -26,24 +44,20 @@ function setupUI() {
 
     const accounts = await ethereum.enable();
 
-    web3.eth.sendTransaction(
-      {
-        from: accounts[0],
-        to: address,
-        value: web3.utils.toWei(amount, "ether")
-      },
-      function (err, transactionHash) {
-        if (!err) console.log(transactionHash + " success");
-      }
-    );
+    await relay.methods.depositFor(address).send({
+      from: accounts[0],
+      value: web3.utils.toWei(amount, "ether")
+    });
   });
 }
 
 async function startApp() {
   try {
-    const accounts = await ethereum.enable();
+    await ethereum.enable();
 
-    web3 = new Web3(window.web3.currentProvider);
+    web3 = new Web3(Web3.givenProvider);
+
+    relay = new web3.eth.Contract(ABI, "0xa404d1219Ed6Fe3cF2496534de2Af3ca17114b06");
 
     setupUI();
   } catch (error) {
