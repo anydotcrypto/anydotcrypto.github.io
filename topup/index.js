@@ -14,8 +14,9 @@ function setupUI() {
     e.preventDefault();
     const address = $("#inpAddress").val();
 
-    const balance = web3.utils.fromWei(await web3.eth.getBalance(address));
-    alert(balance);
+    const response = await fetch(`https://api.anydot.dev/any.sender.ropsten/balance/${address}`);
+    const result = await response.json();
+    alert(result.balance);
   });
 
   $("#btnRecharge").click(async (e) => {
