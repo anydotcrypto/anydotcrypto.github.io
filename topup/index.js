@@ -34,7 +34,7 @@ function setupUI() {
 
     const response = await fetch(`https://api.anydot.dev/any.sender.ropsten/balance/${address}`);
     const result = await response.json();
-    alert(result.balance);
+    alert(`Current balance: ${web3.utils.fromWei(result.balance, "ether")} Ξ`);
   });
 
   $("#btnRecharge").click(async (e) => {
