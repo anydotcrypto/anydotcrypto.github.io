@@ -2,6 +2,13 @@
 let web3 = undefined;
 let relay = undefined;
 
+let apiAddress = undefined;
+
+let UIenabled = true;
+
+const BALANCE_API_ADDRESS_MAINNET = "https://api.anydot.dev/any.sender.mainnet/balance"
+const BALANCE_API_ADDRESS_ROPSTEN = "https://api.anydot.dev/any.sender.ropsten/balance"
+
 const ABI = [
   {
     "inputs": [
@@ -18,36 +25,47 @@ const ABI = [
   }
 ];
 
+function setError(message) {
+  $("#errorMessage").text(message);
+}
 function refreshUI() {
   const address = $("#inpAddress").val();
   const amount = $("#inpAmount").val();
 
-  $("#btnCheckBalance").prop("disabled", !address);
-  $("#btnRecharge").prop("disabled", !address || !amount);
+  $("#btnCheckBalance").prop("disabled", !UIenabled && !address);
+  $("#btnRecharge").prop("disabled", !UIenabled && (!address || !amount));
 }
 
 function setupUI() {
   $("#inpAddress,#inpAmount").on("input", refreshUI);
   $("#btnCheckBalance").click(async (e) => {
     e.preventDefault();
-    const address = $("#inpAddress").val();
+    try {
+      const address = $("#inpAddress").val();
 
-    const response = await fetch(`https://api.anydot.dev/any.sender.ropsten/balance/${address}`);
-    const result = await response.json();
-    alert(`Current balance: ${web3.utils.fromWei(result.balance, "ether")} Ξ`);
+      const response = await fetch(`${balanceApiAddress}/${address}`);
+      const result = await response.json();
+      alert(`Current balance: ${web3.utils.fromWei(result.balance, "ether")} Ξ`);
+    } catch(doh) {
+      setError(doh.message);
+    }
   });
 
   $("#btnRecharge").click(async (e) => {
     e.preventDefault();
-    const address = $("#inpAddress").val();
-    const amount = $("#inpAmount").val();
-
-    const accounts = await ethereum.enable();
-
-    await relay.methods.depositFor(address).send({
-      from: accounts[0],
-      value: web3.utils.toWei(amount, "ether")
-    });
+    try {
+      const address = $("#inpAddress").val();
+      const amount = $("#inpAmount").val();
+  
+      const accounts = await ethereum.enable();
+  
+      await relay.methods.depositFor(address).send({
+        from: accounts[0],
+        value: web3.utils.toWei(amount, "ether")
+      });
+    } catch (doh) {
+      setError(doh.message);
+    }
   });
 }
 
@@ -56,13 +74,18 @@ async function startApp() {
     await ethereum.enable();
 
     web3 = new Web3(Web3.givenProvider);
+    if (ethereum.chainId === "0x1") balanceApiAddress = BALANCE_API_ADDRESS_MAINNET
+    else if (ethereum.chainId === "0x3") balanceApiAddress = BALANCE_API_ADDRESS_ROPSTEN
+    else {
+      setError("Only mainnet and Ropsten are supported.");
+      UIenabled = false;
+    }
 
     relay = new web3.eth.Contract(ABI, "0xa404d1219Ed6Fe3cF2496534de2Af3ca17114b06");
 
     setupUI();
-  } catch (error) {
-    // Handle error. Likely the user rejected the login
-    console.error(error);
+  } catch (doh) {
+    setError(doh.message);
   }
 }
 
