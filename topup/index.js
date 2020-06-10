@@ -81,7 +81,7 @@ async function startApp() {
       UIenabled = false;
     }
 
-    relay = new web3.eth.Contract(ABI, "0xa404d1219Ed6Fe3cF2496534de2Af3ca17114b06");
+    relay = new web3.eth.Contract(ABI, "0x9b4FA5A1D9f6812e2B56B36fBde62736Fa82c2a7");
 
     setupUI();
   } catch (doh) {
