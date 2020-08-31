@@ -206,10 +206,12 @@ const balance = await userDotWallet.any.getBalance();
           </div>
           <div class="example-code-item">
             <pre class="pre"><code class="typescript code">
+// Wrap any.sender functionality 
 const userDotWallet = any.sender(userWallet);
 
+// Send transaction and wait for confirmation
 const tx = await userDotWallet.any.sendTransaction({to: echoContractAddress, data});
-const receipt = await tx.wait(1); // Typical Transaction Receipt 
+const receipt = await tx.wait(1); // Transaction Receipt 
             </code></pre>
           </div>
         </div>
