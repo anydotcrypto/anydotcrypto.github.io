@@ -188,16 +188,17 @@ npm i @any-sender/client
           </div>
           <div class="example-code-item">
             <pre class="pre"><code class="typescript code">
-// send the funds
-const tx = await userWallet.sendTransaction({ 
-    to: relayContractAddress, 
+// Wrap any.sender functionality 
+const userDotWallet = any.sender(userWallet);
+
+// Deposit into any.sender 
+const tx = await userDotWallet.any.deposit({ 
     value: parseEther("1") 
 });
 await tx.wait(12);
 
 // check the balance
-const client = new AnySenderClient(anySenderUrl, receiptSignerAddress);
-const balance = await client.balance(userWallet.address); // 1 ether
+const balance = await userDotWallet.any.getBalance();
                     </code></pre>
           </div>
           <div class="code-header">
@@ -205,28 +206,10 @@ const balance = await client.balance(userWallet.address); // 1 ether
           </div>
           <div class="example-code-item">
             <pre class="pre"><code class="typescript code">
-import { AnySenderClient } from "@any-sender/client";
-const client = new AnySenderClient(anySenderUrl, receiptSignerAddress);
+const userDotWallet = any.sender(userWallet);
 
-// create a relay transaction
-const deadlineBlockNumber = (await provider.getBlockNumber()) + 405;
-const relayTx = {
-    from: userWallet.address,
-    to: echoContractAddress,
-    gas: 100000,
-    deadlineBlockNumber,
-    data,
-    refund: parseEther("0.01").toString(),
-    relayContractAddress
-};
-
-// authorise
-const id = AnySenderClient.relayTxId(relayTx);
-const signature = await userWallet.signMessage(arrayify(id));
-const signedTx = { ...relayTx, signature };
-
-// relay!
-const signedReceipt = await client.relay(signedTx);
+const tx = await userDotWallet.any.sendTransaction({to: echoContractAddress, data});
+const receipt = await tx.wait(1); // Typical Transaction Receipt 
             </code></pre>
           </div>
         </div>
